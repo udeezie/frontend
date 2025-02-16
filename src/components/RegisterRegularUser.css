@@ -1,0 +1,166 @@
+/* Ensure full page height but allow scrolling */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0e1834;
+    color: #ffffff;
+    overflow-y: auto;
+    /* Allows scrolling */
+}
+
+/* Page container ensures content & footer positioning */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Content container: Expands when there is little content */
+.regular-user-page {
+    flex-grow: 1;
+    /* Ensures it takes available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Registration container */
+.regular-user-container {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    padding: 40px;
+}
+
+/* Heading */
+.regular-user-container h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #ffa726;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+/* Input Fields - Line Only */
+form input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #ffa726;
+    background: transparent;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+
+/* Placeholder Styling */
+form input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Focus Effect */
+form input:focus {
+    border-bottom: 2px solid #ff8a26;
+}
+
+/* Register Button */
+form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #ffa726;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+form button:hover {
+    background-color: #ff8a26;
+}
+
+/* Message Display */
+.message {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #cbd5e0;
+    text-align: center;
+}
+
+/* Already have an account text */
+.regular-user-container p {
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+/* Login Link */
+.regular-user-container p a {
+    color: #ffa726;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.regular-user-container p a:hover {
+    text-decoration: underline;
+}
+
+/* Footer - stays at the bottom when content is short */
+.footer {
+    width: 100%;
+    background-color: #0e1834;
+    padding: 30px 20px;
+    text-align: center;
+    color: white;
+    position: relative;
+    bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .regular-user-container {
+        max-width: 90%;
+        padding: 30px;
+    }
+
+    .regular-user-container h1 {
+        font-size: 1.8rem;
+    }
+
+    form input,
+    form button {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .regular-user-container {
+        padding: 20px;
+    }
+
+    .regular-user-container h1 {
+        font-size: 1.6rem;
+    }
+
+    form input,
+    form button {
+        font-size: 0.85rem;
+    }
+}

@@ -1,0 +1,113 @@
+/* Footer Base Styling */
+.footer {
+    background-color: #0e1834;
+    color: #ffffff;
+    padding: 30px 20px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Footer Container */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: nowrap;
+    padding-bottom: 20px;
+}
+
+/* Left Section (KnowQuest Info) */
+.footer-section.knowquest {
+    flex: 2;
+    text-align: left;
+}
+
+/* Right Sections (About & Socials) */
+.footer-section.about,
+.footer-section.socials {
+    flex: 1;
+    text-align: right;
+}
+
+/* Footer Titles */
+.footer-section h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Footer Text */
+.footer-section p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #cbd5e0;
+}
+
+/* Footer Links */
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section li {
+    margin: 5px 0;
+}
+
+.footer-section a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.footer-section a:hover {
+    color: #ffa726;
+    text-decoration: underline;
+}
+
+/* Thin Line Above Copyright */
+.footer-copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 10px;
+    margin-top: 20px;
+    font-size: 0.75rem;
+    color: #cbd5e0;
+    text-align: center;
+    width: 100%;
+}
+
+/* Ensure Footer Doesn't Overlap Content */
+html,
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .footer-section.about,
+    .footer-section.socials {
+        text-align: center;
+    }
+}

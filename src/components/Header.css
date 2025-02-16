@@ -1,0 +1,99 @@
+/* Header Styling */
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  /* Reduced height */
+  background-color: #0e1834;
+  padding: 0 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  /* Reduced logo size */
+  width: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 0.8rem;
+  /* Smaller font size */
+  font-weight: bold;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  padding: 4px 8px;
+  /* Smaller padding */
+  border-radius: 3px;
+}
+
+.nav-links a:hover {
+  color: #ffa726;
+  transform: scale(1.05);
+}
+
+/* Login Button */
+.login-button {
+  background-color: #ffa726;
+  padding: 8px 15px;
+  /* Reduced padding */
+  border-radius: 15px;
+  color: #0e1834;
+  font-weight: bold;
+  font-size: 0.8rem;
+  /* Smaller font */
+  text-decoration: none;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.login-button:hover {
+  background-color: #ff8c42;
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .custom-header {
+    padding: 0 15px;
+  }
+
+  .nav-links {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+
+  .login-button {
+    padding: 7px 14px;
+    font-size: 0.75rem;
+  }
+
+  .logo {
+    height: 35px;
+  }
+}
