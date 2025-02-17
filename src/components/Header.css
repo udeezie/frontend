@@ -3,23 +3,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
-  /* Reduced height */
+  height: 60px; /* Reduced height */
   background-color: #0e1834;
   padding: 0 40px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Logo */
+/* Logo Container */
 .logo-container {
   display: flex;
   align-items: center;
 }
 
 .logo {
-  height: 40px;
-  /* Reduced logo size */
+  height: 40px; /* Reduced logo size */
   width: auto;
   transition: transform 0.3s ease-in-out;
 }
@@ -38,12 +36,10 @@
 .nav-links a {
   text-decoration: none;
   color: white;
-  font-size: 0.8rem;
-  /* Smaller font size */
+  font-size: 0.8rem; /* Smaller font size */
   font-weight: bold;
   transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
-  padding: 4px 8px;
-  /* Smaller padding */
+  padding: 4px 8px; /* Smaller padding */
   border-radius: 3px;
 }
 
@@ -55,13 +51,11 @@
 /* Login Button */
 .login-button {
   background-color: #ffa726;
-  padding: 8px 15px;
-  /* Reduced padding */
+  padding: 8px 15px; /* Reduced padding */
   border-radius: 15px;
   color: #0e1834;
   font-weight: bold;
-  font-size: 0.8rem;
-  /* Smaller font */
+  font-size: 0.8rem; /* Smaller font */
   text-decoration: none;
   transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
 }

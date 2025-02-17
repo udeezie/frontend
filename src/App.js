@@ -6,6 +6,7 @@ import RegisterRegularUser from "./components/RegisterRegularUser";
 import Header from "./components/Header";
 import Dashboard from "./components/Dashboard";
 import RewardsTable from "./components/RewardsTable";
+import Leaderboard from "./components/Leaderboard";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Route path="/register-regular-user" element={<RegisterRegularUser />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/rewards" element={<RewardsTable />} /> 
+        <Route path="/rewards" element={<RewardsTable />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
     </Router>
   );
