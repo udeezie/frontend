@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Footer from "./Footer"; // adjust the path as needed
+import Footer from "./Footer";
+import { FaMedal, FaArrowUp, FaArrowDown } from "react-icons/fa";
 import "./Leaderboard.css";
 
 const Leaderboard = () => {
@@ -8,14 +9,14 @@ const Leaderboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // If you're storing the logged-in user's ID in localStorage:
+  // Retrieve logged-in user's ID (assumed stored in localStorage)
   const currentUserId = localStorage.getItem("userId");
 
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/leaderboard")
       .then((res) => {
-        setLeaders(res.data); // expecting an array of users
+        setLeaders(res.data); // expecting an array of leader objects with 'change' property
         setLoading(false);
       })
       .catch((err) => {
@@ -34,9 +35,9 @@ const Leaderboard = () => {
   }
 
   return (
-    <>
+    <div className="leaderboard-page-container">
       <div className="leaderboard-container">
-        <h2>Global Leaderboard</h2>
+        <h2>KQ Global Leaderboard</h2>
         <table className="leaderboard-table">
           <thead>
             <tr>
@@ -52,17 +53,33 @@ const Leaderboard = () => {
                 key={leader._id}
                 className={leader._id === currentUserId ? "highlight" : ""}
               >
-                <td>{index + 1}</td>
+                <td className={`rank ${index < 3 ? `rank-${index + 1}` : ""}`}>
+                  {/* Show arrow before the rank number */}
+                  {leader.change > 0 ? (
+                    <span className="arrow-up">
+                      <FaArrowUp />
+                    </span>
+                  ) : leader.change < 0 ? (
+                    <span className="arrow-down">
+                      <FaArrowDown />
+                    </span>
+                  ) : null}
+                  {index + 1} {index < 3 && <FaMedal className="medal-icon" />}
+                </td>
                 <td>{leader.name}</td>
                 <td>{leader.points}</td>
-                <td>{leader.badges ? leader.badges.join(", ") : "None"}</td>
+                <td>
+                  {leader.badges && leader.badges.length > 0
+                    ? leader.badges.join(", ")
+                    : "None"}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

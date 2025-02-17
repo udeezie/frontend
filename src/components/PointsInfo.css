@@ -1,0 +1,88 @@
+/* Notepad Background & Animation */
+.points-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fbf8f1; /* Light paper-like color */
+    background-image: 
+      linear-gradient(to bottom, transparent 95%, rgba(0, 0, 0, 0.05) 95%),
+      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 100% 30px, 30px 100%;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 800px;
+    margin: 100px auto;  /* Increased vertical margin for spacing between header and footer */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 2s ease;
+    min-height: 80vh; /* Adjust this value for vertical centering */
+  }
+  
+  /* Fade in up animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Title Styling */
+  .points-info-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #b58900; /* deeper yellow */
+    text-align: center;
+    font-family: "Courier New", Courier, monospace;
+  }
+  
+  /* Description Paragraph */
+  .points-info-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #222; /* deeper text color */
+    font-family: "Courier New", Courier, monospace;
+    text-align: justify;
+  }
+  
+  /* Points List */
+  .points-list {
+    margin-top: 20px;
+    padding-left: 20px;
+    list-style-type: disc;
+    font-family: "Courier New", Courier, monospace;
+    color: #222; /* deeper text color */
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+  
+  .points-list li {
+    margin-bottom: 15px;
+  }
+  
+  .points-list strong {
+    color: #b58900; /* deeper highlight */
+  }
+  
+  /* Highlighted Text */
+  .highlight {
+    color: #b58900;
+    font-weight: bold;
+  }
+  
+  /* Tip Box */
+  .points-info-tip {
+    font-size: 1rem;
+    background-color: rgba(181, 137, 0, 0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
+    font-family: "Courier New", Courier, monospace;
+    color: #555;
+  }
+  

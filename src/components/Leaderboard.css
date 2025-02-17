@@ -1,17 +1,15 @@
-/* Container with a subtle gradient background */
+/* Leaderboard Container */
 .leaderboard-container {
     width: 90%;
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
-    /* Gradient from dark grey (#242424) to slightly lighter (#2f2f2f) */
-    background: linear-gradient(135deg, #242424 20%, #2f2f2f 100%);
+    background: linear-gradient(135deg, #04040400 20%, #2f2f2f 100%);
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
 
-/* Title with a bit more emphasis */
 .leaderboard-container h2 {
     font-size: 2.2rem;
     color: #ffa726;
@@ -20,13 +18,12 @@
     letter-spacing: 1px;
 }
 
-/* Table with a subtle box shadow and gradient header */
+/* Table Styling */
 .leaderboard-table {
     width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
     overflow: hidden;
-    /* ensures rounding if needed */
     margin-top: 20px;
 }
 
@@ -40,7 +37,6 @@
     border: 1px solid #444;
 }
 
-/* Table headers */
 .leaderboard-table th {
     color: #fff;
     font-weight: bold;
@@ -49,51 +45,108 @@
     letter-spacing: 0.5px;
 }
 
-/* Table cells */
 .leaderboard-table td {
     color: #fff;
     font-size: 0.95rem;
     vertical-align: middle;
 }
 
-/* Alternating row background */
+/* Alternating Row Colors */
 .leaderboard-table tr:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* Hover effect on rows */
+/* Hover Effect */
 .leaderboard-table tbody tr:hover {
     background-color: rgba(255, 255, 255, 0.1);
     transition: background-color 0.3s ease;
 }
 
-/* Highlight the current user row */
+/* Highlight Current User Row */
 .leaderboard-table tr.highlight {
     background-color: #ff914d;
     color: #0e1834;
     font-weight: bold;
 }
 
-/* 
-     Optional: color-coded ranks for top 3
-     (requires adding .rank-1, .rank-2, .rank-3 in your code)
-  */
+/* Rank Classes for Top 3 */
 .rank-1 {
     background-color: #ffd700 !important;
-    /* gold */
     color: #0e1834 !important;
 }
 
 .rank-2 {
     background-color: #c0c0c0 !important;
-    /* silver */
     color: #0e1834 !important;
 }
 
 .rank-3 {
     background-color: #cd7f32 !important;
-    /* bronze */
     color: #0e1834 !important;
 }
 
-/* A small trophy icon or star could be placed via :before, if desired */
+/* Medal Icon Styling */
+.medal-icon {
+    margin-left: 4px;
+    color: inherit;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* New Column: Change (Arrow) Styling */
+.change-cell {
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.arrow-up {
+    color: green;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.arrow-down {
+    color: red;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 120px;
+}
+
+/* Updated Footer Styling: Now in normal document flow */
+.footer {
+    background-color: #0e1834;
+    color: #ffffff;
+    padding: 30px 20px;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    /* Removed position: fixed, bottom, left, and z-index */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .leaderboard-container {
+        width: 95%;
+    }
+}

@@ -47,12 +47,10 @@ const Dashboard = () => {
           const userData = response.data.user;
           setUser(userData);
           setRecentActivities(userData.recentActivities || []);
-
           const latestBadge =
             userData.badges.length > 0
               ? userData.badges[userData.badges.length - 1]
               : null;
-
           if (
             latestBadge &&
             latestBadge !== lastBadge &&
@@ -103,7 +101,6 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       {showConfetti && <Confetti width={width} height={height} />}
-
       <div className="dashboard-content">
         <div className="dashboard-header">
           <div className="user-info">
@@ -112,7 +109,9 @@ const Dashboard = () => {
               alt="User Avatar"
               className="user-avatar"
             />
-            <h2>Welcome, {user?.name || "Guest"}! 👋</h2>
+            <h2>
+              Welcome, {user?.name || "Guest"}! <span className="wave">👋</span>
+            </h2>
           </div>
           <button className="logout-btn" onClick={handleLogout}>
             Logout
@@ -131,13 +130,11 @@ const Dashboard = () => {
                   <div className="spinning-emoji">🪙</div>
                 </div>
               </div>
-
-              {/* Progress Bar Container with percentage label */}
               <div className="progress-bar-container">
                 <span className="progress-text">
                   {loading
                     ? "Loading..."
-                    : `Next Tier: ${nextTier} points / ${pointsToNextTier} more 🔥`}
+                    : `Next Badge Points: ${nextTier} points | ${pointsToNextTier} more 🔥`}
                 </span>
                 <div className="progress-row">
                   <div className="progress-bar">
@@ -194,6 +191,23 @@ const Dashboard = () => {
               )}
             </div>
 
+            {/* Missions Card */}
+            <div className="dashboard-card missions-card">
+              <h3>Daily Missions</h3>
+              <ul className="mission-list">
+                <li className="mission-item">
+                  <span className="mission-task">
+                    📌 Rate 5 movies today to get a bonus point
+                  </span>
+                </li>
+                <li className="mission-item">
+                  <span className="mission-task">
+                    📌 Refer 5 friends today for a bonus point
+                  </span>
+                </li>
+              </ul>
+            </div>
+
             {/* Point History */}
             <div className="dashboard-card">
               <h3>Point History</h3>
@@ -228,36 +242,84 @@ const Dashboard = () => {
 
           {/* Right Column */}
           <div className="right-column">
-            {/* Recent Activities */}
-            <div className="dashboard-card recent-activities">
-              <h3>Recent Activities</h3>
-              {loading ? (
-                <p>Loading activities...</p>
-              ) : recentActivities.length > 0 ? (
-                <div className="activities-list">
-                  {recentActivities.map((activity, index) => (
-                    <div key={index} className="activity-card">
-                      <p>Review:</p>
-                      <p>Family: {activity.family}</p>
-                      <p>Category: {activity.category}</p>
-                      <p>Points Earned: {activity.points}</p>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p>No recent activities</p>
-              )}
+            {/* Top Row: Recent Activities & Leaderboard Update Side-by-Side */}
+            <div className="right-top-row">
+              {/* Recent Activities Timeline */}
+              <div className="dashboard-card recent-activities">
+                <h3>Recent Activities</h3>
+                {loading ? (
+                  <p>Loading activities...</p>
+                ) : recentActivities.length > 0 ? (
+                  <div className="timeline">
+                    {recentActivities.map((activity, index) => (
+                      <div key={index} className="timeline-item">
+                        <div className="timeline-date">
+                          {new Date(activity.date).toLocaleDateString()}
+                        </div>
+                        <div className="timeline-content">
+                          <p>
+                            <strong>Review:</strong> {activity.review || "N/A"}
+                          </p>
+                          <p>
+                            <strong>Family:</strong> {activity.family}
+                          </p>
+                          <p>
+                            <strong>Category:</strong> {activity.category}
+                          </p>
+                          <p>
+                            <strong>Points Earned:</strong> {activity.points}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p>No recent activities</p>
+                )}
+              </div>
+
+              {/* Leaderboard Update Card */}
+              <div className="dashboard-card leaderboard-update">
+                <h3>Leaderboard Updates</h3>
+                <p>
+                  Check out the latest rankings and see who's climbing the
+                  leaderboard!
+                </p>
+                <button
+                  className="view-leaderboard-btn"
+                  onClick={() => navigate("/leaderboard")}
+                >
+                  View Leaderboard
+                </button>
+              </div>
             </div>
 
-            {/* Empty Card with GIF */}
+            {/* Keep Grinding Card with Animated Gold Coins */}
             <div className="dashboard-card empty-card">
               <h3>Keep Grinding for the Ultimate KQ points.</h3>
               <p>Strive for the 50,000 points milestone. You can do it! 🚀</p>
               <img
-                src="https://media.giphy.com/media/xT0xeMA62E1XIlup68/giphy.gif"
-                alt="Cute little boy cheering"
-                className="cute-animation"
+                src="https://thumb.r2.moele.me/t/28619/28609669/a-0144.png"
+                alt="Animated Shiny Gold Coins"
+                className="gold-coins"
               />
+            </div>
+
+            {/* How to Earn Points Card */}
+            <div className="dashboard-card points-info-card">
+              <h3>Wondering How to Earn Points?</h3>
+              <p>
+                Discover various ways to boost your points on KnowQuest. From
+                writing reviews, referring friends, daily login bonuses, to
+                completing missions, every action helps you climb the
+                leaderboard and unlock exciting rewards! 😉
+              </p>
+              <button
+                className="info-btn"
+                onClick={() => navigate("/points-info")}
+              >
+                See How
+              </button>
             </div>
 
             {/* Referral Code */}

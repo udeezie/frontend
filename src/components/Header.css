@@ -1,27 +1,25 @@
-/* Header Styling */
+/* Basic header layout */
 .custom-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px; /* Reduced height */
+  height: 60px;
   background-color: #0e1834;
   padding: 0 40px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Logo Container */
 .logo-container {
   display: flex;
   align-items: center;
 }
 
 .logo {
-  height: 40px; /* Reduced logo size */
+  height: 40px;
   width: auto;
   transition: transform 0.3s ease-in-out;
 }
-
 .logo:hover {
   transform: scale(1.05);
 }
@@ -36,10 +34,10 @@
 .nav-links a {
   text-decoration: none;
   color: white;
-  font-size: 0.8rem; /* Smaller font size */
+  font-size: 0.8rem;
   font-weight: bold;
   transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
-  padding: 4px 8px; /* Smaller padding */
+  padding: 4px 8px;
   border-radius: 3px;
 }
 
@@ -51,21 +49,88 @@
 /* Login Button */
 .login-button {
   background-color: #ffa726;
-  padding: 8px 15px; /* Reduced padding */
+  padding: 8px 15px;
   border-radius: 15px;
   color: #0e1834;
   font-weight: bold;
-  font-size: 0.8rem; /* Smaller font */
+  font-size: 0.8rem;
   text-decoration: none;
   transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
-
 .login-button:hover {
   background-color: #ff8c42;
   transform: scale(1.05);
 }
 
-/* Responsive Design */
+/* The small search icon in the nav */
+.search-icon {
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.search-icon:hover {
+  transform: scale(1.1);
+}
+
+/* SEARCH OVERLAY */
+.search-overlay {
+  position: absolute;
+  top: 60px; /* just below the header */
+  right: 0;
+  width: 0; /* start collapsed */
+  height: 0;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: width 0.4s ease, height 0.4s ease;
+  z-index: 999; /* on top of everything else */
+}
+
+/* When overlay is open, expand to ~25% of page, adjust to your liking */
+.search-overlay.open {
+  width: 25vw; 
+  height: 40vh; 
+  /* You can also do: width: 300px; height: 200px; or any dimension you prefer */
+  box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.5);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+/* Form inside overlay */
+.search-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-form input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.search-form button {
+  background-color: #ff8c00;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.search-form button:hover {
+  background-color: #ff6f00;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .custom-header {
     padding: 0 15px;
@@ -89,5 +154,11 @@
 
   .logo {
     height: 35px;
+  }
+
+  /* Make overlay smaller on mobile if desired */
+  .search-overlay.open {
+    width: 70vw;
+    height: 50vh;
   }
 }
