@@ -5,6 +5,7 @@ import Confetti from "react-confetti";
 import { FaTrophy } from "react-icons/fa";
 import { useWindowSize } from "react-use";
 import Footer from "../components/Footer";
+import DogWithBubble from "../components/DogWithBubble"; // The dog bubble component
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -18,6 +19,7 @@ const Dashboard = () => {
   const [celebratedBadge, setCelebratedBadge] = useState(null);
   const [recentActivities, setRecentActivities] = useState([]);
 
+  // Helper to map badge names to CSS classes
   const getBadgeClass = (badge) => {
     const lower = badge.toLowerCase();
     if (lower.includes("bronze")) return "bronze-badge";
@@ -37,20 +39,21 @@ const Dashboard = () => {
         return;
       }
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/dashboard",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const response = await axios.get("http://localhost:5000/api/dashboard", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         if (response.status === 200) {
           const userData = response.data.user;
           setUser(userData);
           setRecentActivities(userData.recentActivities || []);
+
+          // Check if a new badge was earned
           const latestBadge =
             userData.badges.length > 0
               ? userData.badges[userData.badges.length - 1]
               : null;
+
+          // If there's a new badge, trigger confetti
           if (
             latestBadge &&
             latestBadge !== lastBadge &&
@@ -85,6 +88,7 @@ const Dashboard = () => {
     }
   };
 
+  // Calculate progress
   const REFERRAL_TIERS = [50, 500, 1250, 2500, 5000];
   const nextTier =
     REFERRAL_TIERS.find((tier) => tier > (user?.points || 0)) ||
@@ -92,25 +96,18 @@ const Dashboard = () => {
   const progressPercentage = user ? (user.points / nextTier) * 100 : 0;
   const pointsToNextTier = nextTier - (user?.points || 0);
 
-  const profileAvatar = user
-    ? `https://ui-avatars.com/api/?name=${encodeURIComponent(
-        user.name
-      )}&background=ff914d&color=ffffff&rounded=true&size=100`
-    : "https://ui-avatars.com/api/?name=User&background=ff914d&color=ffffff&rounded=true&size=100";
-
   return (
     <div className="dashboard-container">
+      {/* Show confetti if a new badge was earned */}
       {showConfetti && <Confetti width={width} height={height} />}
+
       <div className="dashboard-content">
+        {/* Header with Dog + Bubble and Logout */}
         <div className="dashboard-header">
           <div className="user-info">
-            <img
-              src={profileAvatar}
-              alt="User Avatar"
-              className="user-avatar"
-            />
+            <DogWithBubble />
             <h2>
-              Welcome, {user?.name || "Guest"}! <span className="wave">👋</span>
+              Welcome! <span className="wave">👋</span>
             </h2>
           </div>
           <button className="logout-btn" onClick={handleLogout}>
@@ -118,18 +115,21 @@ const Dashboard = () => {
           </button>
         </div>
 
+        {/* Main Grid */}
         <div className="dashboard-grid">
           {/* Left Column */}
           <div className="left-column">
-            {/* Referral Points */}
+            {/* KQ Points Card */}
             <div className="dashboard-card total-points">
               <div className="points-container">
-                <span className="points-label">Total Referral Points</span>
+                <span className="points-label">Total KQ Points</span>
                 <div className="points-right">
                   {loading ? "Loading..." : user ? user.points : "N/A"}
                   <div className="spinning-emoji">🪙</div>
                 </div>
               </div>
+
+              {/* Progress Bar with dog inside */}
               <div className="progress-bar-container">
                 <span className="progress-text">
                   {loading
@@ -142,6 +142,14 @@ const Dashboard = () => {
                       className="progress-fill"
                       style={{ width: `${progressPercentage}%` }}
                     ></div>
+
+                    {/* The dog image that moves along the bar */}
+                    <img
+                      src="/doggo3.jpg"
+                      alt="Dog in progress bar"
+                      className="progress-dog"
+                      style={{ left: `${progressPercentage}%` }}
+                    />
                   </div>
                   {!loading && (
                     <span className="progress-percentage">
@@ -176,10 +184,7 @@ const Dashboard = () => {
                 <div className="badge-container">
                   <ul className="badge-list">
                     {user.badges.map((badge, index) => (
-                      <li
-                        key={index}
-                        className={`badge ${getBadgeClass(badge)}`}
-                      >
+                      <li key={index} className={`badge ${getBadgeClass(badge)}`}>
                         <FaTrophy className="trophy-icon" />
                         {badge}
                       </li>
@@ -242,9 +247,8 @@ const Dashboard = () => {
 
           {/* Right Column */}
           <div className="right-column">
-            {/* Top Row: Recent Activities & Leaderboard Update Side-by-Side */}
             <div className="right-top-row">
-              {/* Recent Activities Timeline */}
+              {/* Recent Activities */}
               <div className="dashboard-card recent-activities">
                 <h3>Recent Activities</h3>
                 {loading ? (
@@ -258,7 +262,8 @@ const Dashboard = () => {
                         </div>
                         <div className="timeline-content">
                           <p>
-                            <strong>Review:</strong> {activity.review || "N/A"}
+                            <strong>Review:</strong>{" "}
+                            {activity.review || "N/A"}
                           </p>
                           <p>
                             <strong>Family:</strong> {activity.family}
@@ -314,10 +319,7 @@ const Dashboard = () => {
                 completing missions, every action helps you climb the
                 leaderboard and unlock exciting rewards! 😉
               </p>
-              <button
-                className="info-btn"
-                onClick={() => navigate("/points-info")}
-              >
+              <button className="info-btn" onClick={() => navigate("/points-info")}>
                 See How
               </button>
             </div>

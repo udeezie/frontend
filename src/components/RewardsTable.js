@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import { FaGift } from "react-icons/fa";
 import "./RewardsTable.css";
 
-/* For demo, assume user has 300 points. Replace with real data from your app. */
 const userPoints = 300;
 
 const RewardsTable = () => {
@@ -20,7 +19,7 @@ const RewardsTable = () => {
       try {
         const response = await axios.get("http://localhost:5000/api/rewards");
         setRewards(response.data);
-      } catch (err) {
+      } catch {
         setError("Failed to load rewards.");
       } finally {
         setLoading(false);
@@ -31,7 +30,9 @@ const RewardsTable = () => {
 
   const handleRedeem = (reward) => {
     if (userPoints < reward.pointsRequired) {
-      setToastMessage(`You need ${reward.pointsRequired - userPoints} more points!`);
+      setToastMessage(
+        `You need ${reward.pointsRequired - userPoints} more points!`
+      );
     } else {
       setToastMessage(`${reward.name} redeemed successfully!`);
     }
@@ -50,13 +51,10 @@ const RewardsTable = () => {
   return (
     <div className="rewards-page">
       {toastMessage && <div className="toast-message">{toastMessage}</div>}
-
       <div className="rewards-container">
         <h2 className="rewards-title">
           <FaGift className="gift-icon" /> Available Rewards
         </h2>
-
-        {/* Filter & Sort Controls */}
         <div className="controls-container">
           <div className="filter-group">
             <label htmlFor="categoryFilter">Filter by Category:</label>
@@ -68,11 +66,26 @@ const RewardsTable = () => {
             >
               <option value="">All</option>
               <option value="Gift Cards">Gift Cards</option>
-              <option value="Merchandise">Merchandise</option>
               <option value="Travel">Travel</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Fashion">Fashion</option>
+              <option value="Food & Dining">Food & Dining</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Health & Wellness">Health & Wellness</option>
+              <option value="Education">Education</option>
+              <option value="Charity">Charity</option>
+              <option value="Gaming">Gaming</option>
+              <option value="Luxury">Luxury</option>
+              <option value="Hobbies">Hobbies</option>
+              <option value="Home & Kitchen">Home & Kitchen</option>
+              <option value="Outdoors">Outdoors</option>
+              <option value="Music">Music</option>
+              <option value="Tech">Tech</option>
+              <option value="Sports">Sports</option>
+              <option value="Photography">Photography</option>
+              <option value="Art">Art</option>
             </select>
           </div>
-
           <div className="sort-group">
             <label htmlFor="sortOption">Sort by Points:</label>
             <select
@@ -86,7 +99,6 @@ const RewardsTable = () => {
             </select>
           </div>
         </div>
-
         {loading ? (
           <div className="skeleton-grid">
             {[...Array(4)].map((_, i) => (
@@ -98,7 +110,14 @@ const RewardsTable = () => {
         ) : (
           <div className="rewards-grid">
             {sortedRewards.map((reward) => (
-              <div key={reward._id} className="reward-card">
+              <div
+                key={reward._id}
+                className={`reward-card ${
+                  userPoints >= reward.pointsRequired
+                    ? "redeemable"
+                    : "not-redeemable"
+                }`}
+              >
                 <div className="reward-image-wrapper">
                   <img
                     src={reward.image}
@@ -124,7 +143,9 @@ const RewardsTable = () => {
                     onClick={() => handleRedeem(reward)}
                     disabled={userPoints < reward.pointsRequired}
                   >
-                    {userPoints >= reward.pointsRequired ? "Redeem" : "Not enough points"}
+                    {userPoints >= reward.pointsRequired
+                      ? "Redeem"
+                      : "Not enough points"}
                   </button>
                 </div>
               </div>

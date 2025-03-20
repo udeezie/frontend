@@ -9,14 +9,16 @@ const Leaderboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Retrieve logged-in user's ID (assumed stored in localStorage)
   const currentUserId = localStorage.getItem("userId");
 
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/leaderboard")
       .then((res) => {
-        setLeaders(res.data); // expecting an array of leader objects with 'change' property
+        const sortedByBadges = res.data.sort(
+          (a, b) => (b.badges?.length || 0) - (a.badges?.length || 0)
+        );
+        setLeaders(sortedByBadges);
         setLoading(false);
       })
       .catch((err) => {
@@ -37,13 +39,11 @@ const Leaderboard = () => {
   return (
     <div className="leaderboard-page-container">
       <div className="leaderboard-container">
-        <h2>KQ Global Leaderboard</h2>
+        <h2>KQ Badge Leaderboard</h2>
         <table className="leaderboard-table">
           <thead>
             <tr>
               <th>Rank</th>
-              <th>User</th>
-              <th>Points</th>
               <th>Badges</th>
             </tr>
           </thead>
@@ -54,7 +54,6 @@ const Leaderboard = () => {
                 className={leader._id === currentUserId ? "highlight" : ""}
               >
                 <td className={`rank ${index < 3 ? `rank-${index + 1}` : ""}`}>
-                  {/* Show arrow before the rank number */}
                   {leader.change > 0 ? (
                     <span className="arrow-up">
                       <FaArrowUp />
@@ -66,10 +65,8 @@ const Leaderboard = () => {
                   ) : null}
                   {index + 1} {index < 3 && <FaMedal className="medal-icon" />}
                 </td>
-                <td>{leader.name}</td>
-                <td>{leader.points}</td>
                 <td>
-                  {leader.badges && leader.badges.length > 0
+                  {Array.isArray(leader.badges) && leader.badges.length > 0
                     ? leader.badges.join(", ")
                     : "None"}
                 </td>

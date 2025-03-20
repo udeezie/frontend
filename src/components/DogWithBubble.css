@@ -1,0 +1,66 @@
+/* Container to hold dog + bubble */
+.dog-container {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    /* Adjust as needed */
+    height: auto;
+}
+
+/* The dog image itself */
+.dog-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    /* Or "contain" if you prefer */
+    border-radius: 8px;
+}
+
+/* Speech bubble styling */
+.speech-bubble {
+    position: absolute;
+    top: 0;
+    left: 110%;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* semi-transparent white */
+    color: #333;
+    /* darker text for contrast */
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    width: 150px;
+    /* Adjust to your text length */
+    /* Animation with a delay */
+    animation: bubbleFade 0.5s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+/* Fade-in & slide-up animation for the bubble text */
+@keyframes bubbleFade {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.speech-bubble p {
+    margin: 0;
+}
+
+/* Optional arrow using a pseudo-element */
+.speech-bubble::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent rgba(255, 255, 255, 0.9) transparent transparent;
+}

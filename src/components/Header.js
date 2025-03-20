@@ -46,7 +46,7 @@ const Header = () => {
           <form onSubmit={handleSearchSubmit}>
             <input
               type="text"
-              placeholder="Search Leaderboard..."
+              placeholder="Search Rewards..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               autoFocus
